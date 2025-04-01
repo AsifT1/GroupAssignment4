@@ -1,4 +1,4 @@
-name: Build and Push to Docker Hub
+name: Build and Push to Dockerfile Hub
 
 on:
   push:
@@ -14,14 +14,14 @@ jobs:
       - name: Checkout repository
         uses: actions/checkout@v4
 
-      # Step 2: Log in to Docker Hub
-      - name: Log in to Docker Hub
+      # Step 2: Log in to Dockerfile Hub
+      - name: Log in to Dockerfile Hub
         run: echo "${{ secrets.DOCKER_PASSWORD }}" | docker login -u "${{ secrets.DOCKER_USERNAME }}" --password-stdin
 
-      # Step 3: Build Docker Image with build number
-      - name: Build Docker Image
+      # Step 3: Build Dockerfile Image with build number
+      - name: Build Dockerfile Image
         run: docker build -t ${{ secrets.DOCKER_USERNAME }}/is147:${{ github.run_number }} .
 
-      # Step 4: Push Docker Image
-      - name: Push Docker Image
+      # Step 4: Push Dockerfile Image
+      - name: Push Dockerfile Image
         run: docker push ${{ secrets.DOCKER_USERNAME }}/is147:${{ github.run_number }}
